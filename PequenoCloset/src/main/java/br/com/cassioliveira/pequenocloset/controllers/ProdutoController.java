@@ -83,7 +83,7 @@ public class ProdutoController implements Serializable {
      * @return
      */
     public boolean getEditando() {
-        return produto.getId() == null;
+        return produto.getId() != null;
     }
 
 }

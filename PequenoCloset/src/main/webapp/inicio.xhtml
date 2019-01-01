@@ -10,9 +10,10 @@
             <a href="produto/listar-produtos.xhtml">
                 <div style="float: left">
                     <div class="box-resumo-inicio" style="background-color: #00A157">
-                        #{pessoaBean.servidores.size()} <p style="font-size: 13px; text-align: center">
-                            #{pessoaBean.servidores.size() == 1 ? 'Produto cadastrado' : 'Produtos cadastrados'}
+                        #{pessoaBean.servidores.size()} <p style="font-size: 14px; text-align: center; padding-top: 10px">
+                            #{produtoController.produtos.size() == 1 ? 'Produto cadastrado' : 'Produtos cadastrados'}
                         </p>
+                        #{produtoController.produtos.size()}
                     </div>
                     <div style="width: 200px; height: 20px; background-color: #00A157; border: 0px; "></div>
                 </div>

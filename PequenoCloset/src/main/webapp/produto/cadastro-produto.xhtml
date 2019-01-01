@@ -13,7 +13,7 @@
 
     <ui:define name="content"> 
 
-        <p:fieldset>
+        <p:fieldset legend="#{produtoController.editando ? 'Editar cadastro do Produto': 'Novo Produto'}">
             <h:form id="formProduto">
                 <p:growl autoUpdate="true"/>
 
