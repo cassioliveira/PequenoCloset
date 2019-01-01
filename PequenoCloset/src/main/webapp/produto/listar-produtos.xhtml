@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/Layout.xhtml">
+
+    <ui:define name="content">
+        <p:fieldset legend="Produtos cadastrados">
+            <h:form id="formPesquisaProduto">
+
+                <p:growl id="mensagens" autoUpdate="true" class="sobreporMensagens"/>
+
+                <p:toolbar >
+                    <f:facet name="right">
+                        <p:button value="Novo produto" id="botaoTelaCadastro"  icon="fa fa-plus" 
+                                  outcome="/produto/cadastro-produto"/>
+                    </f:facet>
+                </p:toolbar>
+
+                <p:dataTable id="datatablePesquisaProduto" var="produto" value="#{produtoController.produtos}"
+                             paginatorAlwaysVisible="false" style="margin-top: 1px; " rows="10" reflow="true" 
+                             paginatorPosition="bottom" emptyMessage="Nenhum produto encontrado" paginator="true" 
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
+                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,20,50,100"
+                             scrollable="true" scrollRows="10" scrollHeight="290" widgetVar="pesquisaProduto">
+
+                    <f:facet name="header">
+                        <p:outputPanel id="panelFiltroProduto">
+                            <p:inputText id="globalFilter" onkeyup="PF('pesquisaProduto').filter()" style="width:300px" 
+                                         placeholder="Pesquisar"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column headerText="Descrição" width="50" filterMatchMode="contains" filterStyle="width: 300px; display:none"
+                              filterBy="#{produto.descricao}">
+                        <h:outputText value="#{produto.descricao}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Categoria" style="text-align: center" width="20" filterMatchMode="exact" 
+                              filterStyle="width: 20px; display:none" filterBy="#{produto.categoria}">
+                        <h:outputText value="#{produto.categoria}" style="text-transform: capitalize"/>
+                    </p:column>
+                    
+                    <p:column headerText="Valor" style="text-align: center" width="10" filterMatchMode="exact" 
+                              filterStyle="width: 20px; display:none" filterBy="#{produto.valor}">
+                        <h:outputText value="#{produto.valor}">
+                            <f:convertNumber type="currency" locale="ptBR" currencySymbol="R$"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column id="acoes" headerText="Ações" style="text-align: center" width="10">
+                        <p:button id="botaoEditar" title="Editar" icon="fa fa-pencil" style="font-size: 10px"
+                                  outcome="/produto/cadastro-produto">
+                            <f:param name="produto" value="#{produto.id}"/>
+                            <p:tooltip for="botaoEditar" value="Edita dados da linha selecionada"/>
+                        </p:button>
+
+                        <p:commandButton id="deleteButton" title="Remover" icon="fa fa-trash" style="font-size: 10px" 
+                                         action="#{produtoController.excluir}" process="@this" update="datatablePesquisaProduto">
+                            <f:setPropertyActionListener target="#{produtoController.produtoSelecionado}" value="#{produto}"/>
+                            <p:tooltip for="deleteButton" value="Excluir produto"/>
+                            <p:confirm icon="ui-icon-alert" header="Exclusão de cadastro" message="Deseja realmente excluir o cadastro?"/>
+                        </p:commandButton>
+
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:fieldset>
+    </ui:define>
+</ui:composition>
