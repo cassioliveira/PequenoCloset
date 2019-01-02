@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author Cássio Oliveira <cassio@cassioliveira.com.br>
  */
-public class Produtos extends Generic<Produto> implements Serializable {
+public class Produtos extends DaoAbstrato<Produto> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

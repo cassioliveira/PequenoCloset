@@ -15,9 +15,7 @@
 
         <p:fieldset legend="#{produtoController.editando ? 'Editar cadastro do Produto': 'Novo Produto'}">
             <h:form id="formProduto">
-                <p:messages closable="true" severity="info,warn,error">
-                    <p:autoUpdate/> 
-                </p:messages>
+                <p:growl autoUpdate="true"/>
 
                 <h:panelGrid columns="2" style="margin-left: 10px;margin-bottom: 5px">
                     <p:outputLabel for="cadastro" value="Cadastro em: " rendered="#{produtoController.editando}"/>

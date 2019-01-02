@@ -31,10 +31,10 @@ public class ProdutoService implements Serializable {
     }
 
     public Produto findById(Long id) {
-        return produtos.findById(id);
+        return produtos.porId(id);
     }
 
     public List<Produto> findAll() {
-        return produtos.findAll();
+        return produtos.todos();
     }
 }

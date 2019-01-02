@@ -11,7 +11,9 @@
         <p:fieldset legend="Produtos cadastrados">
             <h:form id="formPesquisaProduto">
 
-                <p:growl id="mensagens" autoUpdate="true" class="sobreporMensagens"/>
+                <p:messages closable="true" severity="info,warn,error">
+                    <p:autoUpdate/> 
+                </p:messages>
 
                 <p:toolbar >
                     <f:facet name="right">

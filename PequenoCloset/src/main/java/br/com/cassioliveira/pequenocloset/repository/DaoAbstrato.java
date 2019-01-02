@@ -7,11 +7,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
+ * Esta classe representa um DAO genérico e contém todos os métodos básicos para
+ * efetuar um CRUD.
  *
- * @author Cássio Oliveira <cassio@cassioliveira.com.br>
+ * @author elisangela <elysangeladesouza@gmail.com>
  * @param <T>
  */
-public abstract class Generic<T> implements Serializable {
+public abstract class DaoAbstrato<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +27,7 @@ public abstract class Generic<T> implements Serializable {
      *
      * @param entityClass
      */
-    public Generic(Class<T> entityClass) {
+    public DaoAbstrato(Class<T> entityClass) {
         this.entity = entityClass;
     }
 
@@ -39,7 +41,7 @@ public abstract class Generic<T> implements Serializable {
     }
 
     /**
-     * Metodo utilizado para save um novo cadastro no banco de dados ou editar
+     * Metodo utilizado para salvar um novo cadastro no banco de dados ou editar
      * um cadastro existente.
      *
      * @param entity
@@ -64,7 +66,7 @@ public abstract class Generic<T> implements Serializable {
      *
      * @return
      */
-    public List<T> findAll() {
+    public List<T> todos() {
         CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entity));
         return getEntityManager().createQuery(cq).getResultList();
@@ -77,17 +79,8 @@ public abstract class Generic<T> implements Serializable {
      * @param id
      * @return
      */
-    public T findById(Long id) {
+    public T porId(Long id) {
         return entityManager.find(entity, id);
     }
 
-    /**
-     * Método set da instância do entityManager necessária para a aplicação de
-     * testes de unidade.
-     *
-     * @param entityManager
-     */
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 }
